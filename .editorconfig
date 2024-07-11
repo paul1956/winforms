@@ -595,6 +595,12 @@ visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public
 
 dotnet_separate_import_directive_groups = false:warning
 
+# IDE0001: Simplify Names
+dotnet_diagnostic.IDE0001.severity = silent
+
+# IDE0002: Simplify Member Access
+dotnet_diagnostic.IDE0002.severity = silent
+
 # IDE0079: Remove unnecessary suppression
 dotnet_diagnostic.IDE0079.severity = none
 
