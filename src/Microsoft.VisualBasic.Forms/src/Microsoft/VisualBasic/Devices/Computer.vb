@@ -23,6 +23,15 @@ Namespace Microsoft.VisualBasic.Devices
         ' But that is completely consistent with the rest of the FX design. It is MY.* that is thread safe and leads to best practice access to these objects.
         '  If you dim them up yourself, you are responsible for managing the threading.
 
+        'Lazy initialized cache for the clipboard class. (proxies can be shared - they have no state)
+        Private Shared s_clipboard As ClipboardProxy
+        'Lazy initialized cache for the Keyboard class. SHARED because Keyboard behaves as a ReadOnly singleton class
+        Private Shared s_keyboardInstance As Keyboard
+        'Lazy initialized cache for the Mouse class. SHARED because Mouse behaves as a ReadOnly singleton class
+        Private Shared s_mouse As Mouse
+        'Lazy initialized cache for the Audio class.
+        Private _audio As Audio
+
         ''' <summary>
         '''  Gets an Audio object which can play sound files or resources.
         ''' </summary>
@@ -50,19 +59,6 @@ Namespace Microsoft.VisualBasic.Devices
         End Property
 
         ''' <summary>
-        '''  This property returns the Mouse object containing information about
-        '''  the physical mouse installed to the machine.
-        ''' </summary>
-        ''' <value>An instance of the Mouse class.</value>
-        Public ReadOnly Property Mouse() As Mouse
-            Get
-                If s_mouse IsNot Nothing Then Return s_mouse
-                s_mouse = New Mouse
-                Return s_mouse
-            End Get
-        End Property
-
-        ''' <summary>
         '''  This property returns the Keyboard object representing some
         '''  keyboard properties and a send keys method
         ''' </summary>
@@ -72,6 +68,19 @@ Namespace Microsoft.VisualBasic.Devices
                 If s_keyboardInstance IsNot Nothing Then Return s_keyboardInstance
                 s_keyboardInstance = New Keyboard
                 Return s_keyboardInstance
+            End Get
+        End Property
+
+        ''' <summary>
+        '''  This property returns the Mouse object containing information about
+        '''  the physical mouse installed to the machine.
+        ''' </summary>
+        ''' <value>An instance of the Mouse class.</value>
+        Public ReadOnly Property Mouse() As Mouse
+            Get
+                If s_mouse IsNot Nothing Then Return s_mouse
+                s_mouse = New Mouse
+                Return s_mouse
             End Get
         End Property
 
@@ -88,10 +97,5 @@ Namespace Microsoft.VisualBasic.Devices
             End Get
         End Property
 
-        Private _audio As Audio 'Lazy initialized cache for the Audio class.
-        Private Shared s_clipboard As ClipboardProxy 'Lazy initialized cache for the clipboard class. (proxies can be shared - they have no state)
-        Private Shared s_mouse As Mouse 'Lazy initialized cache for the Mouse class. SHARED because Mouse behaves as a ReadOnly singleton class
-        Private Shared s_keyboardInstance As Keyboard 'Lazy initialized cache for the Keyboard class. SHARED because Keyboard behaves as a ReadOnly singleton class
-
-    End Class 'Computer
+    End Class
 End Namespace

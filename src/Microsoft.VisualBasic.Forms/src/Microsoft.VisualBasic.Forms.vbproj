@@ -10,7 +10,7 @@
     <Deterministic>true</Deterministic>
     <OptionExplicit>On</OptionExplicit>
     <OptionStrict>On</OptionStrict>
-    <OptionInfer>On</OptionInfer>
+    <OptionInfer>Off</OptionInfer>
     <RootNamespace></RootNamespace>
     <LangVersion>Latest</LangVersion>
     <VBRuntime>None</VBRuntime>

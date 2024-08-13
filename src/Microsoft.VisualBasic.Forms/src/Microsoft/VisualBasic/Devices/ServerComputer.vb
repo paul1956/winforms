@@ -18,6 +18,17 @@ Namespace Microsoft.VisualBasic.Devices
         'But that is completely consistent with the rest of the FX design. It is MY.* that is thread safe and leads to best practice access to these objects.
         'If you dim them up yourself, you are responsible for managing the threading.
 
+        'Lazy initialized cache for the Clock class. SHARED because Clock behaves as a readonly singleton class
+        Private Shared s_clock As Clock
+        'Lazy initialized cache for ComputerInfo
+        Private _computerInfo As ComputerInfo
+        'Lazy initialized cache for the FileSystem.
+        Private _fileIO As FileSystemProxy
+        'Lazy initialized cache for the Network class.
+        Private _network As Network
+        'Lazy initialized cache for the Registry class
+        Private _registryInstance As RegistryProxy
+
         ''' <summary>
         '''  Returns the Clock object which contains the LocalTime and GMTTime.
         ''' </summary>
@@ -58,6 +69,17 @@ Namespace Microsoft.VisualBasic.Devices
         End Property
 
         ''' <summary>
+        '''  This property wraps the <see cref="Environment.MachineName"/> property
+        '''  in the .NET framework to return the name of the computer.
+        ''' </summary>
+        ''' <value>A string containing the name of the computer.</value>
+        Public ReadOnly Property Name() As String
+            Get
+                Return Environment.MachineName
+            End Get
+        End Property
+
+        ''' <summary>
         '''  This property returns the Network object containing information about
         '''  the network the machine is part of.
         ''' </summary>
@@ -67,17 +89,6 @@ Namespace Microsoft.VisualBasic.Devices
                 If _network IsNot Nothing Then Return _network
                 _network = New Network
                 Return _network
-            End Get
-        End Property
-
-        ''' <summary>
-        '''  This property wraps the <see cref="Environment.MachineName"/> property
-        '''  in the .NET framework to return the name of the computer.
-        ''' </summary>
-        ''' <value>A string containing the name of the computer.</value>
-        Public ReadOnly Property Name() As String
-            Get
-                Return Environment.MachineName
             End Get
         End Property
 
@@ -94,11 +105,5 @@ Namespace Microsoft.VisualBasic.Devices
             End Get
         End Property
 
-        Private _computerInfo As ComputerInfo 'Lazy initialized cache for ComputerInfo
-        Private _fileIO As FileSystemProxy 'Lazy initialized cache for the FileSystem.
-        Private _network As Network 'Lazy initialized cache for the Network class.
-        Private _registryInstance As RegistryProxy 'Lazy initialized cache for the Registry class
-        Private Shared s_clock As Clock 'Lazy initialized cache for the Clock class. SHARED because Clock behaves as a readonly singleton class
-
-    End Class 'MyServerComputer
+    End Class
 End Namespace

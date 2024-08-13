@@ -25,6 +25,35 @@ Namespace Microsoft.VisualBasic.CompilerServices
                 Lib "user32" () As IntPtr
 
 #Disable Warning CA1838 ' Avoid 'StringBuilder' parameters for P/Invokes
+
+        <DllImport(
+             "kernel32",
+             CharSet:=CharSet.Auto,
+             PreserveSig:=True,
+             BestFitMapping:=False,
+             ThrowOnUnmappableChar:=True)>
+        Friend Function CreateProcess(
+            lpApplicationName As String,
+            lpCommandLine As String,
+            lpProcessAttributes As NativeTypes.SECURITY_ATTRIBUTES,
+            lpThreadAttributes As NativeTypes.SECURITY_ATTRIBUTES,
+            <MarshalAs(UnmanagedType.Bool)> bInheritHandles As Boolean,
+            dwCreationFlags As Integer,
+            lpEnvironment As IntPtr,
+            lpCurrentDirectory As String,
+            lpStartupInfo As NativeTypes.STARTUPINFO,
+            lpProcessInformation As NativeTypes.PROCESS_INFORMATION) As Integer
+        End Function
+
+        <DllImport(
+             "kernel32",
+             CharSet:=CharSet.Auto,
+             PreserveSig:=True,
+             BestFitMapping:=False,
+             ThrowOnUnmappableChar:=True)>
+        Friend Sub GetStartupInfo(<[In](), Out()> lpStartupInfo As NativeTypes.STARTUPINFO)
+        End Sub
+
         <DllImport("user32", CharSet:=CharSet.Auto, PreserveSig:=True, SetLastError:=True)>
         Friend Function GetWindowText(hWnd As IntPtr, <Out(), MarshalAs(UnmanagedType.LPTStr)> lpString As StringBuilder, nMaxCount As Integer) As Integer
 #Enable Warning CA1838 ' Avoid 'StringBuilder' parameters for P/Invokes
@@ -59,37 +88,18 @@ Namespace Microsoft.VisualBasic.CompilerServices
         Friend Declare Function _
             WaitForSingleObject _
                 Lib "kernel32" (hHandle As NativeTypes.LateInitSafeHandleZeroOrMinusOneIsInvalid, dwMilliseconds As Integer) As Integer
-
-        <DllImport(
-             "kernel32",
-             CharSet:=CharSet.Auto,
-             PreserveSig:=True,
-             BestFitMapping:=False,
-             ThrowOnUnmappableChar:=True)>
-        Friend Sub GetStartupInfo(<[In](), Out()> lpStartupInfo As NativeTypes.STARTUPINFO)
-        End Sub
-
-        <DllImport(
-             "kernel32",
-             CharSet:=CharSet.Auto,
-             PreserveSig:=True,
-             BestFitMapping:=False,
-             ThrowOnUnmappableChar:=True)>
-        Friend Function CreateProcess(
-            lpApplicationName As String,
-            lpCommandLine As String,
-            lpProcessAttributes As NativeTypes.SECURITY_ATTRIBUTES,
-            lpThreadAttributes As NativeTypes.SECURITY_ATTRIBUTES,
-            <MarshalAs(UnmanagedType.Bool)> bInheritHandles As Boolean,
-            dwCreationFlags As Integer,
-            lpEnvironment As IntPtr,
-            lpCurrentDirectory As String,
-            lpStartupInfo As NativeTypes.STARTUPINFO,
-            lpProcessInformation As NativeTypes.PROCESS_INFORMATION) As Integer
-        End Function
-
 #Disable Warning IDE0049  ' Use language keywords instead of framework type names for type references, Justification:=<Types come from Windows Native API>
 #Disable Warning IDE1006 ' Naming Styles, Justification:=<Names come from Windows Native API>
+
+        ''' <summary>
+        '''  Obtains information about the system's current usage of both physical and virtual memory.
+        ''' </summary>
+        ''' <param name="lpBuffer">Pointer to a MEMORYSTATUSEX structure.</param>
+        ''' <returns>True if the function succeeds. Otherwise, False.</returns>
+        <DllImport("Kernel32.dll", CharSet:=CharSet.Auto, SetLastError:=True)>
+        Friend Function GlobalMemoryStatusEx(ByRef lpBuffer As MEMORYSTATUSEX) As <MarshalAs(UnmanagedType.Bool)> Boolean
+        End Function
+
         ''' <summary>
         '''  Contains information about the current state of both physical and virtual memory, including extended memory.
         ''' </summary>
@@ -121,17 +131,8 @@ Namespace Microsoft.VisualBasic.CompilerServices
             Friend Sub Init()
                 dwLength = CType(Marshal.SizeOf(GetType(MEMORYSTATUSEX)), UInt32)
             End Sub
+
         End Structure
 #Enable Warning IDE0049  ' Use language keywords instead of framework type names for type references
-
-        ''' <summary>
-        '''  Obtains information about the system's current usage of both physical and virtual memory.
-        ''' </summary>
-        ''' <param name="lpBuffer">Pointer to a MEMORYSTATUSEX structure.</param>
-        ''' <returns>True if the function succeeds. Otherwise, False.</returns>
-        <DllImport("Kernel32.dll", CharSet:=CharSet.Auto, SetLastError:=True)>
-        Friend Function GlobalMemoryStatusEx(ByRef lpBuffer As MEMORYSTATUSEX) As <MarshalAs(UnmanagedType.Bool)> Boolean
-        End Function
-
     End Module
 End Namespace

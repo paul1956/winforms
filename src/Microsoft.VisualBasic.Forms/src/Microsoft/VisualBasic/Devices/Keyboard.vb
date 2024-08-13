@@ -13,39 +13,6 @@ Namespace Microsoft.VisualBasic.Devices
     Public Class Keyboard
 
         ''' <summary>
-        '''  Sends keys to the active window as if typed as keyboard with wait = false.
-        ''' </summary>
-        ''' <param name="keys">A string containing the keys to be sent (typed).</param>
-        Public Sub SendKeys(keys As String)
-            SendKeys(keys, False)
-        End Sub
-
-        ''' <summary>
-        '''  Sends keys to the active window as if typed at keyboard. This overloaded
-        '''  version uses the same conventions as the VB6 SendKeys.
-        ''' </summary>
-        ''' <param name="keys">A string containing the keys to be sent (typed).</param>
-        ''' <param name="wait">Wait for messages to be processed before returning.</param>
-        Public Sub SendKeys(keys As String, wait As Boolean)
-            If wait Then
-                System.Windows.Forms.SendKeys.SendWait(keys)
-            Else
-                System.Windows.Forms.SendKeys.Send(keys)
-            End If
-        End Sub
-
-        ''' <summary>
-        '''  Gets the state (up or down) of the Shift key.
-        ''' </summary>
-        ''' <returns>True if the key is down otherwise false.</returns>
-        Public ReadOnly Property ShiftKeyDown() As Boolean
-            Get
-                Dim keys As Keys = Control.ModifierKeys
-                Return CType(keys And Keys.Shift, Boolean)
-            End Get
-        End Property
-
-        ''' <summary>
         '''  Gets the state (up or down) of the Alt key.
         ''' </summary>
         ''' <returns>True if the key is down otherwise false.</returns>
@@ -53,17 +20,6 @@ Namespace Microsoft.VisualBasic.Devices
             Get
                 Dim keys As Keys = Control.ModifierKeys
                 Return CType(keys And Keys.Alt, Boolean)
-            End Get
-        End Property
-
-        ''' <summary>
-        '''  Gets the state (up or down) of the Ctrl key.
-        ''' </summary>
-        ''' <returns>True if the key is down otherwise false.</returns>
-        Public ReadOnly Property CtrlKeyDown() As Boolean
-            Get
-                Dim keys As Keys = Control.ModifierKeys
-                Return CType(keys And Keys.Control, Boolean)
             End Get
         End Property
 
@@ -78,6 +34,17 @@ Namespace Microsoft.VisualBasic.Devices
                 'The low order byte of the return value from GetKeyState is 1 if the key is
                 'toggled on.
                 Return CType((UnsafeNativeMethods.GetKeyState(Keys.CapsLock) And 1), Boolean)
+            End Get
+        End Property
+
+        ''' <summary>
+        '''  Gets the state (up or down) of the Ctrl key.
+        ''' </summary>
+        ''' <returns>True if the key is down otherwise false.</returns>
+        Public ReadOnly Property CtrlKeyDown() As Boolean
+            Get
+                Dim keys As Keys = Control.ModifierKeys
+                Return CType(keys And Keys.Control, Boolean)
             End Get
         End Property
 
@@ -108,6 +75,39 @@ Namespace Microsoft.VisualBasic.Devices
                 Return CType((UnsafeNativeMethods.GetKeyState(Keys.Scroll) And 1), Boolean)
             End Get
         End Property
+
+        ''' <summary>
+        '''  Gets the state (up or down) of the Shift key.
+        ''' </summary>
+        ''' <returns>True if the key is down otherwise false.</returns>
+        Public ReadOnly Property ShiftKeyDown() As Boolean
+            Get
+                Dim keys As Keys = Control.ModifierKeys
+                Return CType(keys And Keys.Shift, Boolean)
+            End Get
+        End Property
+
+        ''' <summary>
+        '''  Sends keys to the active window as if typed as keyboard with wait = false.
+        ''' </summary>
+        ''' <param name="keys">A string containing the keys to be sent (typed).</param>
+        Public Sub SendKeys(keys As String)
+            SendKeys(keys, False)
+        End Sub
+
+        ''' <summary>
+        '''  Sends keys to the active window as if typed at keyboard. This overloaded
+        '''  version uses the same conventions as the VB6 SendKeys.
+        ''' </summary>
+        ''' <param name="keys">A string containing the keys to be sent (typed).</param>
+        ''' <param name="wait">Wait for messages to be processed before returning.</param>
+        Public Sub SendKeys(keys As String, wait As Boolean)
+            If wait Then
+                System.Windows.Forms.SendKeys.SendWait(keys)
+            Else
+                System.Windows.Forms.SendKeys.Send(keys)
+            End If
+        End Sub
 
     End Class
 End Namespace
