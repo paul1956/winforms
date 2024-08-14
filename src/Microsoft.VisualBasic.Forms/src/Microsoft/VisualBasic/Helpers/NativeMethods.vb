@@ -10,28 +10,26 @@ Namespace Microsoft.VisualBasic.CompilerServices
     Friend Module NativeMethods
 
         <PreserveSig()>
-        Friend Declare Auto Function _
-            WaitForInputIdle _
-                Lib "user32" (Process As NativeTypes.LateInitSafeHandleZeroOrMinusOneIsInvalid, Milliseconds As Integer) As Integer
+        Friend Declare Auto Function WaitForInputIdle Lib "user32" (
+            Process As NativeTypes.LateInitSafeHandleZeroOrMinusOneIsInvalid,
+            Milliseconds As Integer) As Integer
 
         <PreserveSig()>
-        Friend Declare Function _
-            GetWindow _
-                Lib "user32" (hwnd As IntPtr, wFlag As Integer) As IntPtr
+        Friend Declare Function GetWindow Lib "user32" (
+            hwnd As IntPtr,
+            wFlag As Integer) As IntPtr
 
         <PreserveSig()>
-        Friend Declare Function _
-            GetDesktopWindow _
-                Lib "user32" () As IntPtr
+        Friend Declare Function GetDesktopWindow Lib "user32" () As IntPtr
 
 #Disable Warning CA1838 ' Avoid 'StringBuilder' parameters for P/Invokes
 
         <DllImport(
-             "kernel32",
-             CharSet:=CharSet.Auto,
-             PreserveSig:=True,
-             BestFitMapping:=False,
-             ThrowOnUnmappableChar:=True)>
+            "kernel32",
+            CharSet:=CharSet.Auto,
+            PreserveSig:=True,
+            BestFitMapping:=False,
+            ThrowOnUnmappableChar:=True)>
         Friend Function CreateProcess(
             lpApplicationName As String,
             lpCommandLine As String,
@@ -55,39 +53,39 @@ Namespace Microsoft.VisualBasic.CompilerServices
         End Sub
 
         <DllImport("user32", CharSet:=CharSet.Auto, PreserveSig:=True, SetLastError:=True)>
-        Friend Function GetWindowText(hWnd As IntPtr, <Out(), MarshalAs(UnmanagedType.LPTStr)> lpString As StringBuilder, nMaxCount As Integer) As Integer
+        Friend Function GetWindowText(
+            hWnd As IntPtr,
+            <Out(),
+            MarshalAs(UnmanagedType.LPTStr)> lpString As StringBuilder,
+            nMaxCount As Integer) As Integer
 #Enable Warning CA1838 ' Avoid 'StringBuilder' parameters for P/Invokes
         End Function
 
         <PreserveSig()>
-        Friend Declare Function _
-            AttachThreadInput _
-                Lib "user32" (idAttach As Integer, idAttachTo As Integer, fAttach As Integer) As Integer
+        Friend Declare Function AttachThreadInput Lib "user32" (
+            idAttach As Integer,
+            idAttachTo As Integer,
+            fAttach As Integer) As Integer
 
         <PreserveSig()>
-        Friend Declare Function _
-            SetForegroundWindow _
-                Lib "user32" (hwnd As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
+        Friend Declare Function SetForegroundWindow Lib "user32" (hwnd As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
 
         <PreserveSig()>
-        Friend Declare Function _
-            SetFocus _
-                Lib "user32" (hwnd As IntPtr) As IntPtr
+        Friend Declare Function SetFocus Lib "user32" (hwnd As IntPtr) As IntPtr
 
         <PreserveSig()>
-        Friend Declare Auto Function _
-            FindWindow _
-                Lib "user32" (lpClassName As String, lpWindowName As String) As IntPtr
+        Friend Declare Auto Function FindWindow Lib "user32" (
+            lpClassName As String,
+            lpWindowName As String) As IntPtr
 
         <PreserveSig()>
-        Friend Declare Function _
-            CloseHandle _
-                Lib "kernel32" (hObject As IntPtr) As Integer
+        Friend Declare Function CloseHandle Lib "kernel32" (hObject As IntPtr) As Integer
 
         <PreserveSig()>
-        Friend Declare Function _
-            WaitForSingleObject _
-                Lib "kernel32" (hHandle As NativeTypes.LateInitSafeHandleZeroOrMinusOneIsInvalid, dwMilliseconds As Integer) As Integer
+        Friend Declare Function WaitForSingleObject Lib "kernel32" (
+            hHandle As NativeTypes.LateInitSafeHandleZeroOrMinusOneIsInvalid,
+            dwMilliseconds As Integer) As Integer
+
 #Disable Warning IDE0049  ' Use language keywords instead of framework type names for type references, Justification:=<Types come from Windows Native API>
 #Disable Warning IDE1006 ' Naming Styles, Justification:=<Names come from Windows Native API>
 
@@ -134,5 +132,6 @@ Namespace Microsoft.VisualBasic.CompilerServices
 
         End Structure
 #Enable Warning IDE0049  ' Use language keywords instead of framework type names for type references
+
     End Module
 End Namespace

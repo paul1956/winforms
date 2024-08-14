@@ -4,6 +4,7 @@
 Imports Microsoft.Win32.SafeHandles
 
 Namespace Microsoft.VisualBasic.CompilerServices
+
     Partial Friend NotInheritable Class NativeTypes
 
         ''' <summary>

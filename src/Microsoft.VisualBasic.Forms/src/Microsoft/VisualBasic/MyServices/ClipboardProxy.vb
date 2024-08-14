@@ -110,7 +110,7 @@ Namespace Microsoft.VisualBasic.MyServices
         ''' <summary>
         '''  Gets a file drop list from the clipboard.
         ''' </summary>
-        ''' <returns>The list of file paths as a StringCollection.</returns>
+        ''' <returns>The list of file paths as a <see cref="StringCollection"/>.</returns>
         Public Function GetFileDropList() As StringCollection
             Return Clipboard.GetFileDropList()
         End Function
@@ -178,15 +178,15 @@ Namespace Microsoft.VisualBasic.MyServices
         ''' <summary>
         '''  Saves the passed in file drop list to the clipboard.
         ''' </summary>
-        ''' <param name="filePaths">The file drop list as a StringCollection.</param>
+        ''' <param name="filePaths">The file drop list as a <see cref="StringCollection"/>.</param>
         Public Sub SetFileDropList(filePaths As StringCollection)
             Clipboard.SetFileDropList(filePaths)
         End Sub
 
         ''' <summary>
-        '''  Saves the passed in image to the clipboard.
+        '''  Saves the passed in <see cref="Image"/>  to the clipboard.
         ''' </summary>
-        ''' <param name="image">The image to be saved.</param>
+        ''' <param name="image">The <see cref="Image"/> to be saved.</param>
         Public Sub SetImage(image As Image)
             Clipboard.SetImage(image)
         End Sub

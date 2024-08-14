@@ -58,5 +58,6 @@ Namespace Microsoft.VisualBasic.ApplicationServices
         ''' </summary>
         Public Property MinimumSplashScreenDisplayTime As Integer =
             WindowsFormsApplicationBase.MinimumSplashExposureDefault
+
     End Class
 End Namespace

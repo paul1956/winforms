@@ -17,11 +17,15 @@ Namespace Microsoft.VisualBasic.Devices
     ''' </summary>
     Public Class Computer : Inherits ServerComputer
 
-        'NOTE: The .Net design guidelines state that access to Instance members does not have to be thread-safe. Access to Shared members does have to be thread-safe.
-        'Since My.Computer creates the instance of Computer in a thread-safe way, access to the Computer will necessarily be thread-safe.
-        'There is nothing to prevent a user from passing our computer object across threads or creating their own instance and then getting into trouble.
-        ' But that is completely consistent with the rest of the FX design. It is MY.* that is thread safe and leads to best practice access to these objects.
-        '  If you dim them up yourself, you are responsible for managing the threading.
+        '  NOTE: The .Net design guidelines state that access to Instance members does not
+        '  have to be thread-safe. Access to Shared members does have to be thread-safe.
+        '  Since My.Computer creates the instance of Computer in a thread-safe way,
+        '  access to the Computer will necessarily be thread-safe. There is nothing to
+        '  prevent a user from passing our computer object across threads or creating
+        '  their own instance and then getting into trouble. But that is completely
+        '  consistent with the rest of the FX design. It is MY.* that is thread safe
+        '  and leads to best practice access to these objects. If you Dim them up yourself,
+        '  you are responsible for managing the threading.
 
         'Lazy initialized cache for the clipboard class. (proxies can be shared - they have no state)
         Private Shared s_clipboard As ClipboardProxy
@@ -35,7 +39,7 @@ Namespace Microsoft.VisualBasic.Devices
         ''' <summary>
         '''  Gets an Audio object which can play sound files or resources.
         ''' </summary>
-        ''' <value>A sound object.</value>
+        ''' <value>A <see cref="Computer.Audio"/> object.</value>
         Public ReadOnly Property Audio() As Audio
             Get
                 If _audio IsNot Nothing Then Return _audio
@@ -45,9 +49,9 @@ Namespace Microsoft.VisualBasic.Devices
         End Property
 
         ''' <summary>
-        '''  A thin wrapper for System.Windows.Forms.Clipboard
+        '''  A thin wrapper for <see cref="System.Windows.Forms.Clipboard"/>.
         ''' </summary>
-        ''' <value>An object representing the clipboard.</value>
+        ''' <value>An object representing the <see cref="Computer.Clipboard"/>.</value>
         Public ReadOnly Property Clipboard() As ClipboardProxy
             Get
                 If s_clipboard Is Nothing Then
@@ -59,10 +63,10 @@ Namespace Microsoft.VisualBasic.Devices
         End Property
 
         ''' <summary>
-        '''  This property returns the Keyboard object representing some
-        '''  keyboard properties and a send keys method
+        '''  This property returns the <see cref="Devices.Keyboard"/> object
+        '''  representing some keyboard properties and a send keys method
         ''' </summary>
-        ''' <value>An instance of the Keyboard class.</value>
+        ''' <value>An instance of the <see cref="Computer.Keyboard"/> class.</value>
         Public ReadOnly Property Keyboard() As Keyboard
             Get
                 If s_keyboardInstance IsNot Nothing Then Return s_keyboardInstance
@@ -75,7 +79,7 @@ Namespace Microsoft.VisualBasic.Devices
         '''  This property returns the Mouse object containing information about
         '''  the physical mouse installed to the machine.
         ''' </summary>
-        ''' <value>An instance of the Mouse class.</value>
+        ''' <value>An instance of the <see cref="Computer.Mouse"/>  class.</value>
         Public ReadOnly Property Mouse() As Mouse
             Get
                 If s_mouse IsNot Nothing Then Return s_mouse
@@ -87,7 +91,7 @@ Namespace Microsoft.VisualBasic.Devices
         ''' <summary>
         '''  This property returns the primary display screen.
         ''' </summary>
-        ''' <value>A System.Windows.Forms.Screen object as the primary screen.</value>
+        ''' <value>A <see cref="System.Windows.Forms.Screen"/> object as the primary screen.</value>
         Public ReadOnly Property Screen() As Screen
             Get
                 'Don't cache this. The Screen class responds to display resolution changes by nulling out AllScreens, which

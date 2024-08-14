@@ -31,8 +31,8 @@ Namespace Microsoft.VisualBasic.Devices
             Get
                 'Security Note: Only the state of the Caps Lock is returned
 
-                'The low order byte of the return value from GetKeyState is 1 if the key is
-                'toggled on.
+                'The low order byte of the return value from
+                'GetKeyState is 1 if the key is toggled on.
                 Return CType((UnsafeNativeMethods.GetKeyState(Keys.CapsLock) And 1), Boolean)
             End Get
         End Property
@@ -56,8 +56,8 @@ Namespace Microsoft.VisualBasic.Devices
             Get
                 'Security Note: Only the state of the Num Lock is returned
 
-                'The low order byte of the return value from GetKeyState is 1 if the key is
-                'toggled on.
+                'The low order byte of the return value from
+                'GetKeyState is 1 if the key is toggled on.
                 Return CType((UnsafeNativeMethods.GetKeyState(Keys.NumLock) And 1), Boolean)
             End Get
         End Property
@@ -70,8 +70,8 @@ Namespace Microsoft.VisualBasic.Devices
             Get
                 'Security Note: Only the state of the Scroll Lock is returned
 
-                'The low order byte of the return value from GetKeyState is 1 if the key is
-                'toggled on.
+                'The low order byte of the return value from
+                'GetKeyState is 1 if the key is toggled on.
                 Return CType((UnsafeNativeMethods.GetKeyState(Keys.Scroll) And 1), Boolean)
             End Get
         End Property

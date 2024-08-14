@@ -4,7 +4,6 @@
 Imports System.Collections.Specialized
 Imports System.ComponentModel
 Imports System.Text
-
 Imports ExUtils = Microsoft.VisualBasic.CompilerServices.ExceptionUtils
 
 Namespace Microsoft.VisualBasic.Logging
@@ -79,8 +78,9 @@ Namespace Microsoft.VisualBasic.Logging
         End Sub
 
         ''' <summary>
-        '''  Has the TraceSource fire a TraceEvent for all listeners using information
-        '''   in an exception to form the message and appending additional info.
+        '''   Has the <see cref="TraceSource"/> fire a TraceEvent for all listeners
+        '''   using information in an exception to form the message and appending
+        '''   additional info.
         ''' </summary>
         ''' <param name="ex">The exception being logged.</param>
         ''' <param name="severity">The type of message (error, info, etc...).</param>
@@ -90,8 +90,8 @@ Namespace Microsoft.VisualBasic.Logging
         End Sub
 
         ''' <summary>
-        '''  Has the TraceSource fire a TraceEvent for all listeners using information in
-        '''  an exception to form the message and appending additional info.
+        '''  Has the TraceSource fire a TraceEvent for all listeners using
+        '''  information in an exception to form the message and appending additional info.
         ''' </summary>
         ''' <param name="ex">The exception being logged.</param>
         ''' <param name="severity">The type of message (error, info, etc...).</param>
@@ -234,6 +234,7 @@ Namespace Microsoft.VisualBasic.Logging
 
         ' Names of TraceSources
         Private Const WINAPP_SOURCE_NAME As String = "DefaultSource"
+
         ' Taken from appConfig
         Private Const DEFAULT_FILE_LOG_TRACE_LISTENER_NAME As String = "FileLog"
 

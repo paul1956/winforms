@@ -44,7 +44,9 @@ Namespace Microsoft.VisualBasic.Devices
         '''  Gets the object representing the file system of the computer.
         ''' </summary>
         ''' <value>A System.IO.FileSystem object.</value>
-        ''' <remarks>The instance returned by this property is lazy initialized and cached.</remarks>
+        ''' <remarks>
+        '''  The instance returned by this property is lazy initialized and cached.
+        ''' </remarks>
         Public ReadOnly Property FileSystem() As FileSystemProxy
             Get
                 If _fileIO Is Nothing Then
@@ -57,8 +59,10 @@ Namespace Microsoft.VisualBasic.Devices
         ''' <summary>
         '''  Gets the object representing information about the computer's state
         ''' </summary>
-        ''' <value>A Microsoft.VisualBasic.MyServices.ComputerInfo object.</value>
-        ''' <remarks>The instance returned by this property is lazy initialized and cached.</remarks>
+        ''' <value>A <see cref="ComputerInfo"/>  object.</value>
+        ''' <remarks>
+        '''  The instance returned by this property is lazy initialized and cached.
+        ''' </remarks>
         Public ReadOnly Property Info() As ComputerInfo
             Get
                 If _computerInfo Is Nothing Then
